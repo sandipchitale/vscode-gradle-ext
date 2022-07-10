@@ -1,0 +1,25 @@
+initscript {
+  repositories {
+    gradlePluginPortal()
+  }
+
+  dependencies {
+    classpath 'com.github.ben-manes:gradle-versions-plugin:+'
+  }
+}
+
+allprojects {
+  apply plugin: com.github.benmanes.gradle.versions.VersionsPlugin
+
+  tasks.named("dependencyUpdates").configure {
+    doFirst {
+      project.repositories.each {
+        if (it.name == 'TeamCity') {
+          it.metaClass.getUrl = { ->
+            it.getUrl();
+          }
+        }
+      }
+    }
+  }
+}
