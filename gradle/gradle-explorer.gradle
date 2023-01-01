@@ -1,0 +1,72 @@
+import javax.swing.plaf.basic.BasicLookAndFeel
+import java.awt.event.*
+import javax.swing.*
+import javax.swing.tree.*
+import java.util.concurrent.CountDownLatch
+
+def addChild(DefaultMutableTreeNode p, String name, def value, int depth = 0) {
+    if (depth < 4) {
+        DefaultMutableTreeNode c = new DefaultMutableTreeNode("${name}: ${value}");
+        p.add(c)
+        depth++;
+        try {
+            if (value instanceof Object && !(value instanceof String) && !(value instanceof Class)) {
+                if (value.properties) {
+                    value.properties.keySet().sort().each {
+                        try {
+                            addChild(c, it, value[it], depth)
+                        } catch (Throwable t) {
+                        }
+                    }
+                }
+            }
+        } catch (Throwable t) {
+        }
+    }
+}
+
+gradle.projectsEvaluated {
+    // Does the user wants to run only specified tasks?
+    if (rootProject.hasProperty('gradle-explorer')) {
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        SwingUtilities.invokeAndWait(new Runnable() {
+            public void run() {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+                UIManager.put("Tree.leafIcon", UIManager.lookAndFeel.defaults.getIcon('FileView.fileIcon'));
+
+                // Get all tasks
+                def ts = rootProject.getAllTasks(true).values().flatten().collect().stream().map { t -> t.path }.sorted().toArray()
+
+                //create the root node
+                DefaultMutableTreeNode root = new DefaultMutableTreeNode("Explorer");
+                addChild(root, 'project', rootProject)
+                addChild(root, 'gradle', gradle)
+
+                JTree explorer =  new JTree(root);
+                // explorer.setRootVisible(false);
+                explorer.putClientProperty("JTree.lineStyle", "Angled");
+
+                explorer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10))
+
+                JScrollPane sp = new JScrollPane(explorer);
+                sp.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10))
+
+                JFrame explorerFrame = new JFrame('Gradle Explorer');
+                explorerFrame.addWindowListener(new WindowAdapter() {
+                    public void windowClosed(WindowEvent e) {
+                        countDownLatch.countDown()
+                    }
+                })
+                explorerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE)
+                explorerFrame.setContentPane(sp);
+                explorerFrame.setBounds(400, 10, 800, 1000);
+                explorerFrame.setIconImage(UIManager.lookAndFeel.defaults.getIcon('Tree.openIcon').image)
+                explorerFrame.setVisible(true);
+            }
+        });
+        countDownLatch.await();
+    }
+}
+
+
