@@ -6,17 +6,16 @@ Extends Gradle for Java VSCode extension.
 **NEW:** Once the groovysh is launched try the following command:
 
 ```
-Groovy Shell (3.0.9, JVM: 11.0.14.1)
+Groovy Shell (4.0.14, JVM: 17.x.x)
 Type ':help' or ':h' for help.
 -------------------------------------------------------------------------------
-groovy:000> ObjectBrowser.inspect(project)
+groovy:000> :inspect project
 ```
 
-to launch a treetable based ObjectBrowser UI:
+to launch the ObjectBrowser GUI.
 
-![ObjectBrowserTreeTable](images/ObjectBrowserTreeTable.png)
-
-A Tree Table UI based Object Browser is shown. Hovering over the cells shows tooltip. ```CTRL+BUTTON3``` click copies the value to clipboard.
+![ObjectBrowser](images/ObjectBrowser.png)
+You can drill down the table rows by double clicking on the row.
 
 ## Features
 
@@ -42,6 +41,6 @@ A Tree Table UI based Object Browser is shown. Hovering over the cells shows too
 
 ## Release Notes
 
-### 1.0.34
+### 1.0.35
 
 Initial release.

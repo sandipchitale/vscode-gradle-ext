@@ -3,7 +3,7 @@
 	"displayName": "Extend Gradle for Java extention",
 	"icon": "images/icon.png",
 	"description": "Extends Gradle for Java VSCode extension",
-	"version": "1.0.35",
+	"version": "1.0.36",
 	"license": "LICENSE.md",
 	"publisher": "sandipchitale",
     "author": {

@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
     outputChannel = vscode.window.createOutputChannel(context.extension.id.replace('sandipchitale.', ''));
 
     context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.dependencyUpdates', dependencyUpdates));
-    context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.explorer', explorer));
+    // context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.explorer', explorer));
     context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.groovysh', groovysh));
     context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.tiOrder', tiOrder));
     context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.tiTree', tiTree));
