@@ -2,28 +2,15 @@
 
 Extends Gradle for Java VSCode extension.
 
-**NEW:** Use ```vscode-gradle-ext.groovysh``` to run ```groovysh``` in the context of the gradle build.
-**NEW:** Once the groovysh is launched try the following command:
+**UPDATE:** The command ```vscode-gradle-ext.groovysh``` has been moved to dedicated extension [Start groovysh in the context of Gradle project](https://marketplace.visualstudio.com/items?itemName=sandipchitale.vscode-gradle-groovysh).
 
-```
-Groovy Shell (4.0.14, JVM: 17.x.x)
-Type ':help' or ':h' for help.
--------------------------------------------------------------------------------
-groovy:000> :inspect project
-```
-
-to launch the ObjectBrowser GUI.
-
-![ObjectBrowser](images/ObjectBrowser.png)
-You can drill down the table rows by double clicking on the row.
+**UPDATE** Removed ```vscode-gradle-ext.explorer``` command.
 
 ## Features
 
 |Name|Description|Contexts|
 |-|-|-|
 |vscode-gradle-ext.dependencyUpdates|Show Dependency Updates Report|Gradle Projects view title|
-|vscode-gradle-ext.explorer|         Explorer                 |Gradle Projects view title|
-|vscode-gradle-ext.groovysh|         Start groovysh in build context|Gradle Projects view title|
 |vscode-gradle-ext.tiOrder|          Task order               |Gradle Projects view task item|
 |vscode-gradle-ext.tiTree|           Task tree                |Gradle Projects view task item|
 |vscode-gradle-ext.copyName|         Copy Name                |Gradle Projects view task item|
@@ -41,6 +28,6 @@ You can drill down the table rows by double clicking on the row.
 
 ## Release Notes
 
-### 1.0.35
+### 1.0.37
 
 Initial release.

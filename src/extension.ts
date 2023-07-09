@@ -6,16 +6,12 @@ import * as child_process from 'child_process';
 let workspaceFolder: string;
 
 let APPLY_GRADLE_VERSION_PLUGIN_DOT_GRADLE = 'gradle/gradle-versions-plugin.gradle';
-let APPLY_GRADLE_EXPLORER_DOT_GRADLE = 'gradle/gradle-explorer.gradle';
-let APPLY_GRADLE_GROOVYSH_DOT_GRADLE = 'gradle/gradle-groovysh.gradle';
 let APPLY_GRADLE_TASKINFO_DOT_GRADLE = 'gradle/gradle-taskinfo.gradle';
 
 let outputChannel: vscode.OutputChannel;
 
 export function activate(context: vscode.ExtensionContext) {
     APPLY_GRADLE_VERSION_PLUGIN_DOT_GRADLE = path.join(context.extensionPath, 'gradle', 'gradle-versions-plugin.gradle');
-    APPLY_GRADLE_EXPLORER_DOT_GRADLE = path.join(context.extensionPath, 'gradle', 'gradle-explorer.gradle');
-    APPLY_GRADLE_GROOVYSH_DOT_GRADLE = path.join(context.extensionPath, 'gradle', 'gradle-groovysh.gradle');
     APPLY_GRADLE_TASKINFO_DOT_GRADLE = path.join(context.extensionPath, 'gradle', 'gradle-taskinfo.gradle');
 
     if (vscode.workspace.workspaceFolders && vscode.workspace.workspaceFolders.length > 0) {
@@ -25,8 +21,6 @@ export function activate(context: vscode.ExtensionContext) {
     outputChannel = vscode.window.createOutputChannel(context.extension.id.replace('sandipchitale.', ''));
 
     context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.dependencyUpdates', dependencyUpdates));
-    // context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.explorer', explorer));
-    context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.groovysh', groovysh));
     context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.tiOrder', tiOrder));
     context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.tiTree', tiTree));
     context.subscriptions.push(vscode.commands.registerCommand('vscode-gradle-ext.copyName', copyName));
@@ -39,21 +33,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 function dependencyUpdates() {
     aprt(APPLY_GRADLE_VERSION_PLUGIN_DOT_GRADLE, 'dependencyUpdates');
-}
-
-function explorer() {
-    aprt(APPLY_GRADLE_EXPLORER_DOT_GRADLE, '-Pgradle-explorer -q :tasks');
-}
-
-function groovysh() {
-    if (workspaceFolder) {
-        const terminal = vscode.window.createTerminal({
-            name: 'groovysh',
-            cwd: workspaceFolder
-        });
-        terminal.show();
-        terminal.sendText(`.${path.sep}gradlew -q --no-daemon --console=plain --init-script ${APPLY_GRADLE_GROOVYSH_DOT_GRADLE} groovysh`);
-    }
 }
 
 function tiOrder(taskTreeItem: any) {

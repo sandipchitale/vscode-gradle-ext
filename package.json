@@ -3,7 +3,7 @@
 	"displayName": "Extend Gradle for Java extention",
 	"icon": "images/icon.png",
 	"description": "Extends Gradle for Java VSCode extension",
-	"version": "1.0.36",
+	"version": "1.0.37",
 	"license": "LICENSE.md",
 	"publisher": "sandipchitale",
     "author": {
@@ -28,17 +28,6 @@
 		"vscjava.vscode-gradle"
 	],
 	"activationEvents": [
-        "onCommand:vscode-gradle-ext.dependencyUpdates",
-        "onCommand:vscode-gradle-ext.explorer",
-        "onCommand:vscode-gradle-ext.groovysh",
-        "onCommand:vscode-gradle-ext.tiOrder",
-        "onCommand:vscode-gradle-ext.tiTree",
-        "onCommand:vscode-gradle-ext.copyName",
-        "onCommand:vscode-gradle-ext.copyPath",
-        "onCommand:vscode-gradle-ext.helpTask",
-        "onCommand:vscode-gradle-ext.dependencyInsight",
-        "onCommand:vscode-gradle-ext.dependenciesConfiguration",
-        "onCommand:vscode-gradle-ext.copyLabel"
 	],
 	"main": "./out/extension.js",
 	"preview": true,
@@ -48,16 +37,6 @@
 				"command": "vscode-gradle-ext.dependencyUpdates",
 				"title": "Dependency Updates Report",
 				"icon": "$(request-changes)"
-			},
-			{
-				"command": "vscode-gradle-ext.explorer",
-				"title": "Explorer",
-				"icon": "$(folder-opened)"
-			},
-			{
-				"command": "vscode-gradle-ext.groovysh",
-				"title": "Start groovysh in project context",
-				"icon": "$(debug-console)"
 			},
 			{
 				"command": "vscode-gradle-ext.tiOrder",
@@ -98,16 +77,6 @@
 		],
 		"menus": {
 			"view/title": [
-				{
-					"command": "vscode-gradle-ext.groovysh",
-					"when": "view =~ /^gradleTasksView$/",
-					"group": "navigation"
-				},
-				{
-					"command": "vscode-gradle-ext.explorer",
-					"when": "view =~ /^gradleTasksView$/",
-					"group": "navigation"
-				},
 				{
 					"command": "vscode-gradle-ext.dependencyUpdates",
 					"when": "view =~ /^gradleTasksView$/",
